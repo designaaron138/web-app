@@ -6,6 +6,7 @@ const logger = require("morgan");
 const path = require("path");
 const { createServer } = require("http");
 // 👉 Replace this with express-openid-connect require 👈
+const { auth } = require("express-oauth2-bearer");
 const { auth, requiresAuth } = require("express-openid-connect");
 const axios = require("axios").default;
 
@@ -39,7 +40,9 @@ app.use(
   })
 );
 
-// 👉 Replace this with auth middleware 👈
+// 👆 public routes above 👆
+app.use(auth());
+// 👇 private routes below 👇
 
 app.use(
  auth({
